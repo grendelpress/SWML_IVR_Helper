@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Radio } from 'lucide-react';
+import { Radio, Github } from 'lucide-react';
 import FormPanel from './components/FormPanel';
 import OutputPanel from './components/OutputPanel';
 import { compileTemplate, DEFAULT_TEMPLATE, SWMLData } from './utils/generateSWML';
@@ -73,6 +73,21 @@ export default function App() {
           </div>
         </div>
       </main>
+
+      <footer className="border-t border-gray-800 mt-auto">
+        <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+          <p className="text-xs text-gray-600">SignalWire Markup Language IVR Builder</p>
+          <a
+            href="https://github.com/grendelpress/SWML_IVR_Helper"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-1.5 text-xs text-gray-500 hover:text-gray-300 transition-colors duration-200"
+          >
+            <Github size={13} />
+            grendelpress/SWML_IVR_Helper
+          </a>
+        </div>
+      </footer>
     </div>
   );
 }
