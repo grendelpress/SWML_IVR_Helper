@@ -1,7 +1,5 @@
 # SWML IVR Helper
 
-[![Open in Bolt](https://bolt.new/static/open-in-bolt.svg)](https://bolt.new/~/sb1-8cqz2qhm)
-
 A browser-based tool for generating [SignalWire Markup Language (SWML)](https://developer.signalwire.com/sdks/reference/swml/) scripts for IVR (Interactive Voice Response) phone flows — no coding required.
 
 ## What It Does
