@@ -1,6 +1,7 @@
-import { Download, Eye, FileCode, AlertTriangle, Info, RotateCcw } from 'lucide-react';
+import { Eye, FileCode, AlertTriangle, Info, RotateCcw } from 'lucide-react';
 import CopyButton from './CopyButton';
 import TemplateEditor from './TemplateEditor';
+import PresetManager from './PresetManager';
 import { SWMLData, getUnknownVariables, getEmptyKnownVariables } from '../utils/generateSWML';
 import { OutputMode } from '../App';
 
@@ -26,18 +27,7 @@ export default function OutputPanel({
   const unknownVars = getUnknownVariables(template);
   const emptyVars = getEmptyKnownVariables(template, data);
 
-  const downloadContent = mode === 'preview' ? compiledSWML : template;
-  const downloadFilename = mode === 'preview' ? 'ivr-flow.yaml' : 'ivr-template.yaml';
-
-  const handleDownload = () => {
-    const blob = new Blob([downloadContent], { type: 'text/yaml' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = downloadFilename;
-    a.click();
-    URL.revokeObjectURL(url);
-  };
+  const copyContent = mode === 'preview' ? compiledSWML : template;
 
   return (
     <div className="flex flex-col h-full min-h-0">
@@ -78,16 +68,11 @@ export default function OutputPanel({
               Reset
             </button>
           )}
-          <button
-            onClick={handleDownload}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-md text-sm font-medium bg-gray-700 text-gray-200 hover:bg-gray-600 transition-colors duration-200"
-          >
-            <Download size={14} />
-            Download .yaml
-          </button>
-          <CopyButton text={downloadContent} />
+          <CopyButton text={copyContent} />
         </div>
       </div>
+
+      <PresetManager currentTemplate={template} onLoad={onTemplateChange} />
 
       {mode === 'template' && unknownVars.length > 0 && (
         <div className="flex items-start gap-2 mb-2 px-3 py-2 rounded-lg bg-amber-500/10 border border-amber-500/20 text-xs text-amber-300">
