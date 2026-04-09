@@ -73,6 +73,7 @@ export default function App() {
               template={template}
               compiledSWML={compiledSWML}
               data={data}
+              customVarKeys={customVariables.map((v) => v.key)}
               mode={mode}
               onModeChange={setMode}
               onTemplateChange={setTemplate}

@@ -100,10 +100,10 @@ export function compileTemplate(
   });
 }
 
-export function getUnknownVariables(template: string): string[] {
+export function getUnknownVariables(template: string, customVarKeys: string[] = []): string[] {
   const matches = [...template.matchAll(/\{\{([^}]+)\}\}/g)];
   const found = new Set(matches.map((m) => m[1]));
-  return [...found].filter((v) => !KNOWN_VARIABLES.includes(v));
+  return [...found].filter((v) => !KNOWN_VARIABLES.includes(v) && !customVarKeys.includes(v));
 }
 
 export function getEmptyKnownVariables(template: string, data: SWMLData): string[] {

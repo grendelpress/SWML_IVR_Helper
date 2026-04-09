@@ -9,6 +9,7 @@ interface OutputPanelProps {
   template: string;
   compiledSWML: string;
   data: SWMLData;
+  customVarKeys: string[];
   mode: OutputMode;
   onModeChange: (mode: OutputMode) => void;
   onTemplateChange: (value: string) => void;
@@ -19,12 +20,13 @@ export default function OutputPanel({
   template,
   compiledSWML,
   data,
+  customVarKeys,
   mode,
   onModeChange,
   onTemplateChange,
   onResetTemplate,
 }: OutputPanelProps) {
-  const unknownVars = getUnknownVariables(template);
+  const unknownVars = getUnknownVariables(template, customVarKeys);
   const emptyVars = getEmptyKnownVariables(template, data);
 
   const copyContent = mode === 'preview' ? compiledSWML : template;
