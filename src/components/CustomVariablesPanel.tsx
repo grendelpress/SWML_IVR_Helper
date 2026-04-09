@@ -75,7 +75,7 @@ export default function CustomVariablesPanel({ variables, onChange }: CustomVari
             onClick={() => setAdding(true)}
             className="flex items-center gap-1 px-2 py-1 rounded-lg text-xs text-gray-400 hover:text-white bg-gray-800 hover:bg-gray-700 border border-gray-700 hover:border-gray-500 transition-all duration-150"
           >
-            <Plus size={11} />
+            <Plus size={11} /> 
             Add variable
           </button>
         )}
@@ -87,7 +87,7 @@ export default function CustomVariablesPanel({ variables, onChange }: CustomVari
             <div className="flex items-center justify-between mb-1.5">
               <label className={labelClass + ' mb-0'}>
                 <span className="text-blue-400/80 mr-0.5">{'{'}</span>
-                {{v.key}}
+                {v.key}
                 <span className="text-blue-400/80 ml-0.5">{'}'}</span>
               </label>
               <button
