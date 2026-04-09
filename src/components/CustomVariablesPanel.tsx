@@ -85,10 +85,10 @@ export default function CustomVariablesPanel({ variables, onChange }: CustomVari
         {variables.map((v) => (
           <div key={v.id}>
             <div className="flex items-center justify-between mb-1.5">
-              <label className={labelClass + ' mb-0'}>
-                <span className="text-blue-400/80 mr-0.5">{'{'}</span>
+              <label className={labelClass + ' mb-0 font-mono cursor-copy select-all'} title="Copy and paste into template">
+                <span className="text-blue-400/80">{'{{'}</span>
                 {v.key}
-                <span className="text-blue-400/80 ml-0.5">{'}'}</span>
+                <span className="text-blue-400/80">{'}}'}</span>
               </label>
               <button
                 onClick={() => handleDelete(v.id)}
