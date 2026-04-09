@@ -87,7 +87,7 @@ export default function CustomVariablesPanel({ variables, onChange }: CustomVari
             <div className="flex items-center justify-between mb-1.5">
               <label className={labelClass + ' mb-0'}>
                 <span className="text-blue-400/80 mr-0.5">{'{'}</span>
-                {v.key}
+                {{v.key}}
                 <span className="text-blue-400/80 ml-0.5">{'}'}</span>
               </label>
               <button
