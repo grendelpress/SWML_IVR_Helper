@@ -1,8 +1,12 @@
 import { SWMLData } from '../utils/generateSWML';
+import { CustomVariable } from '../utils/customVariables';
+import CustomVariablesPanel from './CustomVariablesPanel';
 
 interface FormPanelProps {
   data: SWMLData;
   onChange: (field: keyof SWMLData, value: string) => void;
+  customVariables: CustomVariable[];
+  onCustomVariablesChange: (vars: CustomVariable[]) => void;
 }
 
 const inputClass =
@@ -13,7 +17,7 @@ const textareaClass =
 
 const labelClass = 'block text-xs font-semibold text-gray-400 uppercase tracking-wider mb-1.5';
 
-export default function FormPanel({ data, onChange }: FormPanelProps) {
+export default function FormPanel({ data, onChange, customVariables, onCustomVariablesChange }: FormPanelProps) {
   const isValidPhone = data.salesNumber === '' || data.salesNumber.startsWith('+');
 
   return (
@@ -86,6 +90,13 @@ export default function FormPanel({ data, onChange }: FormPanelProps) {
           onChange={(e) => onChange('closing', e.target.value)}
           placeholder="Thank you for calling. We will be in touch shortly."
           className={textareaClass}
+        />
+      </div>
+
+      <div className="border-t border-gray-700/60 pt-5">
+        <CustomVariablesPanel
+          variables={customVariables}
+          onChange={onCustomVariablesChange}
         />
       </div>
     </div>

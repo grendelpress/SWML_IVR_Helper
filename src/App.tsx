@@ -3,6 +3,7 @@ import { Radio, Github } from 'lucide-react';
 import FormPanel from './components/FormPanel';
 import OutputPanel from './components/OutputPanel';
 import { compileTemplate, DEFAULT_TEMPLATE, SWMLData } from './utils/generateSWML';
+import { CustomVariable, loadCustomVariables } from './utils/customVariables';
 
 export type OutputMode = 'preview' | 'template';
 
@@ -19,8 +20,10 @@ export default function App() {
   const [data, setData] = useState<SWMLData>(DEFAULT_DATA);
   const [template, setTemplate] = useState<string>(DEFAULT_TEMPLATE);
   const [mode, setMode] = useState<OutputMode>('preview');
+  const [customVariables, setCustomVariables] = useState<CustomVariable[]>(() => loadCustomVariables());
 
-  const compiledSWML = compileTemplate(template, data);
+  const customVarsMap = Object.fromEntries(customVariables.map((v) => [v.key, v.value]));
+  const compiledSWML = compileTemplate(template, data, customVarsMap);
 
   const handleChange = (field: keyof SWMLData, value: string) => {
     setData((prev) => ({ ...prev, [field]: value }));
@@ -57,7 +60,12 @@ export default function App() {
                 Fill in your IVR details to generate the SWML script
               </p>
             </div>
-            <FormPanel data={data} onChange={handleChange} />
+            <FormPanel
+              data={data}
+              onChange={handleChange}
+              customVariables={customVariables}
+              onCustomVariablesChange={setCustomVariables}
+            />
           </div>
 
           <div className="bg-gray-800/50 border border-gray-700 rounded-2xl p-6 flex flex-col min-h-[500px] lg:min-h-0">

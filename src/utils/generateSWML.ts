@@ -87,10 +87,16 @@ sections:
 
     - hangup: {}`;
 
-export function compileTemplate(template: string, data: SWMLData): string {
+export function compileTemplate(
+  template: string,
+  data: SWMLData,
+  customVars: Record<string, string> = {}
+): string {
   return template.replace(/\{\{([^}]+)\}\}/g, (_, key) => {
     const k = key as keyof SWMLData;
-    return data[k] !== undefined ? data[k] : `{{${key}}}`;
+    if (data[k] !== undefined) return data[k];
+    if (customVars[key] !== undefined) return customVars[key];
+    return `{{${key}}}`;
   });
 }
 
